@@ -130,3 +130,12 @@ body {
   }
 }
 
+.img-wrapper-project {
+    width: 100%;
+    display: inline-block;
+}
+
+.img-wrapper-project img {
+    width: 100%;
+    height: auto;
+}
