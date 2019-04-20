@@ -42,7 +42,9 @@ def make_projects():
     pass
 
 def copy_statics():
-    pass
+    shutil.copy2(os.path.join(base_path, "style.css"),
+                 os.path.join(build_folder_path, "style.css"))
+    print("copied statics")
 
 def generate():
     clean_build_folder()
