@@ -1,7 +1,8 @@
-<link rel="stylesheet" type="text/css" href="../style.css">
+<link rel="stylesheet" type="text/css" href="../../style.css">
 
 <div class="split left">
   <div class="main-wrapper">
+  <a href="../../index.html">
     <div class="header-wrapper">
     <div id="name">
     Nom Prenom
@@ -11,18 +12,16 @@
       </div>
       </div>
     </div>
+  </a>
 
     <div id="content">
+        {% for img_name in project.img_names %}
         <div class="img-wrapper-project">
-            <a target="_blank" href="img/1-image.jpg">
-                <img src="img/1-image.jpg">
+            <a target="_blank" href="img/{{ img_name }}">
+                <img src="img/{{ img_name }}">
             </a>
         </div>
-        <div class="img-wrapper-project">
-            <a target="_blank" href="img/2-image.jpg">
-                <img src="img/2-image.jpg">
-            </a>
-        </div>
+        {% endfor %}
     </div>
   </div>
 </div>
@@ -33,7 +32,7 @@
 <div class="split right">
   <div class="right-header-wrapper">
     <div id="cv">
-    Projet 1
+      {{ project.name }}
     </div>
     <div class="bar-wrapper">
     <div class="right-bar">
@@ -42,7 +41,7 @@
   </div>
 
   <div id="detail">
-    details sur ce projet
+      {{ project.comment }}
   </div>
   
   <div id="mail">

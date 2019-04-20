@@ -11,11 +11,9 @@ build_folder_path = os.path.join(base_path, "build")
 class Project:
     def __init__(self, path):
         self.path = path
-        print(path)
         self.name = os.path.basename(path)
-        print(self.name)
         self.img_names = list(os.listdir(os.path.join(path,"img")))
-        self.detail = "Details du projet"
+        self.comment = "Details du projet"
 
 def clean_build_folder():
     if os.path.exists(build_folder_path):
@@ -39,8 +37,26 @@ def make_index(index_template, projects):
         f.write(s)
     print(f"rendered {index_path}")
 
-def make_projects():
-    pass
+def make_projects(project_template, projects):
+    build_projects_folder_path = os.path.join(build_folder_path, "projects")
+
+    if os.path.exists(build_projects_folder_path):
+        shutil.rmtree(build_projects_folder_path)
+    os.makedirs(build_projects_folder_path)
+
+    for project in projects:
+        s = project_template.render(project=project)
+        src_path = os.path.join(projects_folder_path, project.name)
+        out_path = os.path.join(build_projects_folder_path, project.name)
+        os.makedirs(out_path)
+        with open(os.path.join(out_path, "project.html"), "w") as f:
+            f.write(s)
+        shutil.copytree(os.path.join(src_path, "img"),
+                        os.path.join(out_path, "img"))
+        shutil.copy2(os.path.join(src_path, "icon.jpg"),
+                     os.path.join(out_path, "icon.jpg"))
+        print(f"built project { project.name }")
+    
 
 def copy_statics():
     shutil.copy2(os.path.join(base_path, "style.css"),
@@ -55,7 +71,7 @@ def generate():
 
     copy_statics()
     make_index(env.get_template("index.html"), projects)
-    make_projects()
+    make_projects(env.get_template("project.html"), projects)
 
 if __name__ == "__main__":
     generate()
