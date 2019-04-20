@@ -1,0 +1,51 @@
+<link rel="stylesheet" type="text/css" href="style.css">
+
+<div class="split left">
+  <div class="main-wrapper">
+  <a href="#">
+    <div class="header-wrapper">
+    <div id="name">
+    Nom Prenom
+    </div>
+    <div class="bar-wrapper">
+      <div class="left-bar">
+      </div>
+      </div>
+    </div>
+  </a>
+
+    <div id="content">
+        {% for project in projects %}
+        <div class="img-wrapper">
+            <a href="{{ project.name }}/project.html">
+                <img src="{{ project.name }}/icon.png">
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+  </div>
+</div>
+
+<div class="main-bar">
+</div>
+
+<div class="split right">
+  <div class="right-header-wrapper">
+    <div id="cv">
+    Curriculum Vitae
+    </div>
+    <div class="bar-wrapper">
+    <div class="right-bar">
+    </div>
+    </div>
+  </div>
+
+  <div id="detail">
+    blablabla
+  </div>
+  
+  <div id="mail">
+  mail@me.com
+  </div>
+</div>
+
