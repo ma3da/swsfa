@@ -10,9 +10,11 @@ build_folder_path = os.path.join(base_path, "build")
 
 class Project:
     def __init__(self, path):
-        self.name = os.path.dirname(path)
         self.path = path
-        self.img_names = [img_name for img_name in os.listdir(self.path)]
+        print(path)
+        self.name = os.path.basename(path)
+        print(self.name)
+        self.img_names = list(os.listdir(os.path.join(path,"img")))
         self.detail = "Details du projet"
 
 def clean_build_folder():
@@ -24,8 +26,7 @@ def clean_build_folder():
 def get_projects():
     if not os.path.exists(projects_folder_path):
         os.makedirs(projects_folder_path)
-    return [Project(os.path.join(projects_folder_path, folder_name)) for folder_name in
-os.listdir(projects_folder_path)]
+    return [Project(os.path.join(projects_folder_path, folder_name)) for folder_name in os.listdir(projects_folder_path)]
 
 def create_jinja_env():
     env = jinja2.Environment(loader=jinja2.FileSystemLoader(templates_folder_path))
