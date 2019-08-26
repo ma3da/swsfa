@@ -47,7 +47,7 @@ def get_projects():
     return [Project(os.path.join(projects_folder_path, folder_name)) for folder_name in os.listdir(projects_folder_path)]
 
 def get_infos():
-    return yaml.safe_load(get_file_content(os.path.join(base_path, "infos.txt")))
+    return yaml.safe_load(get_file_content(os.path.join(base_path, "infos.txt"), "title: ''"))
 
 def create_jinja_env():
     env = jinja2.Environment(loader=jinja2.FileSystemLoader(templates_folder_path))
