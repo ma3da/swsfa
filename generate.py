@@ -1,5 +1,6 @@
 import os
 import shutil
+
 import jinja2
 import yaml
 
@@ -11,6 +12,7 @@ templates_folder_path = os.path.join(base_path, "templates")
 build_folder_path = os.path.join(base_path, "build")
 build_projects_folder_path = os.path.join(build_folder_path, "projects")
 
+
 def get_file_content(file_path, value_if_missing=""):
     s = value_if_missing
     if os.path.exists(file_path):
@@ -20,7 +22,13 @@ def get_file_content(file_path, value_if_missing=""):
 
 
 class Project:
-    def __init__(self, path, icon_file_name="icon.png", comment_file_name="details.txt", img_folder_name="img"):
+    def __init__(
+        self,
+        path,
+        icon_file_name="icon.png",
+        comment_file_name="details.txt",
+        img_folder_name="img",
+    ):
         self.name = os.path.basename(path)
 
         self.path = path
@@ -41,25 +49,35 @@ def clean_build_folder():
     os.makedirs(build_folder_path)
     print("cleaned build folder")
 
+
 def get_projects():
     if not os.path.exists(projects_folder_path):
         os.makedirs(projects_folder_path)
-    return [Project(os.path.join(projects_folder_path, folder_name)) for folder_name in os.listdir(projects_folder_path)]
+    return [
+        Project(os.path.join(projects_folder_path, folder_name))
+        for folder_name in os.listdir(projects_folder_path)
+    ]
+
 
 def get_infos():
-    return yaml.safe_load(get_file_content(os.path.join(base_path, "infos.txt"), "title: ''"))
+    return yaml.safe_load(
+        get_file_content(os.path.join(base_path, "infos.txt"), "title: ''")
+    )
+
 
 def create_jinja_env():
     env = jinja2.Environment(loader=jinja2.FileSystemLoader(templates_folder_path))
     return env
 
+
 def make_index(index_template, projects, infos):
-    cv = get_file_content(os.path.join(base_path, "cv.txt")) 
+    cv = get_file_content(os.path.join(base_path, "cv.txt"))
     rendered = index_template.render(projects=projects, cv=cv, **infos)
     index_path = os.path.join(build_folder_path, "index.html")
     with open(index_path, "w") as f:
         f.write(rendered)
     print(f"rendered {index_path}")
+
 
 def make_projects(project_template, projects, infos):
     build_projects_folder_path = os.path.join(build_folder_path, "projects")
@@ -76,11 +94,15 @@ def make_projects(project_template, projects, infos):
         shutil.copytree(project.img_folder_path, project.build_img_folder_path)
         shutil.copy2(project.icon_path, project.build_icon_path)
         print(f"built project { project.name }")
-    
+
+
 def copy_statics():
-    shutil.copy2(os.path.join(base_path, "style.css"),
-                 os.path.join(build_folder_path, "style.css"))
+    shutil.copy2(
+        os.path.join(base_path, "style.css"),
+        os.path.join(build_folder_path, "style.css"),
+    )
     print("copied statics")
+
 
 def generate():
     clean_build_folder()
@@ -93,6 +115,6 @@ def generate():
     make_index(env.get_template("index.html"), projects, infos)
     make_projects(env.get_template("project.html"), projects, infos)
 
+
 if __name__ == "__main__":
     generate()
-
