@@ -10,23 +10,31 @@ html {
 
 body {
   margin: auto;
-  height: 100%;
+  height: 98%;
   width: 100%;
   padding-top: 2vh;
-  padding-bottom: 2vh;
-  color: #000000;
+  padding-bottom: 5vh;
+  color: rgb(25, 50, 75);
+}
+
+::-webkit-scrollbar {
+  width: 0.2vw;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(240, 240, 240);
 }
 
 a {
   text-decoration: none;
-  color: black;
+  color: rgb(25, 50, 75);
 }
 
 .main-bar {
   width: 0.2vw;
   min-width: 2px;
   height: 100%;
-  background-color: black;
+  background-color: rgb(25, 50, 75);
   float: left;
 }
 
@@ -44,7 +52,7 @@ a {
 }
 
 .main-wrapper {
-  width: 80%;
+  width: 90%;
   height: 100%;
   float: right;
   overflow: hidden;
@@ -57,14 +65,14 @@ a {
 }
 
 .left-bar {
- background-color: black;
+ background-color: rgb(25, 50, 75);
  width: 100%;
  height: 100%;
  float: right;
 }
 
 .right-bar {
- background-color: black;
+ background-color: rgb(25, 50, 75);
  width: 100%;
  height: 100%;
  float: left;
@@ -75,14 +83,15 @@ a {
 }
 
 #name {
-  padding-top: 5vh;
+  padding-top: 0vh;
   display: inline-block;
   vertical-align: bottom;
-  font-size: 5vh;
+  font-size: 4vw;
+  letter-spacing: 2px
 }
 
 #content {
-  padding: 1vw;
+  padding-top: 1vh;
   text-align: center;
   overflow: auto;
   height: 80%;
@@ -95,9 +104,10 @@ a {
 
 #cv {
   text-align: right;
-  padding-top: 2vh;
+  padding-top: 0vh;
   padding-left: 2vw;
-  font-size: 4vh;
+  font-size: 3vw;
+  letter-spacing: 5px;
 }
 
 #detail {
@@ -107,20 +117,25 @@ a {
 }
 
 #mail {
+  padding-top: 2vh;
+  padding-right: 2vw;
   width: 100%;
   text-align: right;
+  font-size:2vw;
 }
 
 
 .img-wrapper {
-    width: 25%;
+    width: 28%;
     display: inline-block;
-    margin: 1vw;
+    margin: .5vw;
+    margin-bottom: .1vw
 }
 
 .img-wrapper img {
     width: 100%;
     height: auto;
+    border-radius: 20px;
 }
 
 @media only screen and (max-width: 1200px) {
@@ -143,4 +158,6 @@ a {
 .img-wrapper-project img {
     width: 100%;
     height: auto;
+    max-width: 750px;
+    padding: 10px;
 }
